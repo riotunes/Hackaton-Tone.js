@@ -34,7 +34,6 @@ function setup() {
   Tone.Transport.start();
 
   // Start patterns and schedule stops
-
   patterns.kickPattern.start(0);
   patterns.kickPattern.stop("16m");
 
@@ -44,8 +43,11 @@ function setup() {
   patterns.clapLowPattern.start("16m");
   patterns.clapLowPattern.stop("32m");
 
+  patterns.clapLowPattern.start("64m");
+  patterns.clapLowPattern.stop("96m");
+
   patterns.synthPattern.start("16m");
-  patterns.synthPattern.stop("64m");
+  patterns.synthPattern.stop("80m");
 
   patterns.kickPattern.start("32m");
   patterns.kickPattern.stop("64m");
@@ -63,13 +65,13 @@ function setup() {
   patterns.openHatPattern.stop("64m");
 
   bassIntroPart.start("32m");
-  bassIntroPart.stop("80m");
+  bassIntroPart.stop("64m");
 
   bassPart.start("80m");
   bassPart.stop("96m");
 
   patterns.arpeggi.start("8m"); // Piano arpeggio starts at 8 measures
-
+  patterns.arpeggi.start("96m");
   // Schedule instruments
   instruments.downlifter.start(0);
 
