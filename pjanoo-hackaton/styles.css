@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: linear-gradient(45deg, #b317da, #2575fc);
+  color: #fafafa;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  color: #fafafa; /* Aggiungi il colore desiderato per h1 */
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Usa lo stesso text-shadow di h1 */
+  color: #dedede; /* Imposta lo stesso colore di h1 */
+  letter-spacing: 1px; /* Aggiunge uno spazio tra le lettere per un aspetto più raffinato */
+  transition: all 0.3s ease-in-out; /* Aggiunge una transizione per eventuali modifiche */
+}
+
+
+
+
+/* Control Panel Styles */
+.control-panel {
+  width: 400px;
+  padding: 40px;
+  border-radius: 15px;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  margin: 0 auto;
+}
+
+.top-panel {
+  margin-bottom: 30px;
+}
+
+/* Stile per il contenitore dei bottoni */
+.buttons {
+  margin-bottom: 20px;
+}
+
+/* Stile di base per i bottoni */
+button {
+  padding: 12px 30px;
+  font-size: 18px;
+  margin: 0 15px;
+  border: none;
+  border-radius: 10px; /* Angoli più arrotondati per un look più morbido */
+  cursor: pointer;
+  background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradiente dinamico sullo sfondo */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease; /* Transizione fluida per ogni cambiamento */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombra per effetto di profondità */
+}
+
+/* Effetto hover per i bottoni */
+button:hover {
+  transform: scale(1.1); /* Ingrandisce il bottone al passaggio del mouse */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Ombra più forte per l'interazione */
+  background: linear-gradient(45deg, #2575fc, #6a11cb); /* Inverte il gradiente per effetto hover */
+}
+
+/* Stile per il bottone "Start" */
+#start-button {
+  background: linear-gradient(45deg, #4CAF50, #45a049); /* Colori di partenza del gradiente */
+
+}
+
+#start-button:hover {
+  background: linear-gradient(45deg, #45a049, #4CAF50); /* Colori invertiti al passaggio del mouse */
+}
+
+/* Stile per il bottone "Stop" */
+#stop-button {
+  background: linear-gradient(45deg, #f44336, #d32f2f); /* Colori di partenza del gradiente */
+}
+
+#stop-button:hover {
+  background: linear-gradient(45deg, #d32f2f, #f44336); /* Colori invertiti al passaggio del mouse */
+}
+
+
+/* Volume Fader Styles */
+.volume-fader {
+  margin-top: 20px;
+  text-align: center;
+}
+
+label {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #6a11cb, #2575fc); /* Aggiungi un gradiente al testo */
+  -webkit-background-clip: text; /* Applica il gradiente solo sul testo */
+  background-clip: text;
+  color: transparent; /* Rende il testo trasparente per far vedere il gradiente */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.5); /* Ombra per dare profondità */
+  letter-spacing: 1px; /* Distanza tra le lettere per un aspetto più elegante */
+  transition: all 0.3s ease-in-out; /* Aggiunge una transizione per effetto hover */
+}
+
+
+
+input[type="range"] {
+  width: 250px;
+  height: 8px;
+  border-radius: 10px;
+  background: #bbb;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+input[type="range"]:hover {
+  background: #666;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #2575fc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: #6a11cb;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #2575fc;
+  transition: background-color 0.3s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background-color: #2111cb;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: #670edb;
+}
+
+/* Faders Styles */
+.faders {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
