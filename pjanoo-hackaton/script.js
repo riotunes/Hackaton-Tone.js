@@ -1,16 +1,12 @@
+/ Variabili per il controllo delle fader
+let volumeControl = 0.5;
+let drumsControl = 1;
+let bassControl = 1;
+let melodiesControl = 1;
+
 // START AUDIO CONTEXT
 
-// Wait for user interaction to start the audio context
-document.body.addEventListener("click", () => {
-  Tone.start()
-    .then(() => {
-      console.log("Audio context started!");
-      setup(); // Call setup after the audio context is enabled
-    })
-    .catch((e) => {
-      console.error("Failed to start audio context:", e);
-    });
-});
+
 
 // MODEL
 let instruments = {};
@@ -34,6 +30,7 @@ function setup() {
   Tone.Transport.start();
 
   // Start patterns and schedule stops
+
   patterns.kickPattern.start(0);
   patterns.kickPattern.stop("16m");
 
@@ -43,11 +40,8 @@ function setup() {
   patterns.clapLowPattern.start("16m");
   patterns.clapLowPattern.stop("32m");
 
-  patterns.clapLowPattern.start("64m");
-  patterns.clapLowPattern.stop("96m");
-
   patterns.synthPattern.start("16m");
-  patterns.synthPattern.stop("80m");
+  patterns.synthPattern.stop("64m");
 
   patterns.kickPattern.start("32m");
   patterns.kickPattern.stop("64m");
@@ -65,13 +59,13 @@ function setup() {
   patterns.openHatPattern.stop("64m");
 
   bassIntroPart.start("32m");
-  bassIntroPart.stop("64m");
+  bassIntroPart.stop("80m");
 
   bassPart.start("80m");
   bassPart.stop("96m");
 
   patterns.arpeggi.start("8m"); // Piano arpeggio starts at 8 measures
-  patterns.arpeggi.start("96m");
+
   // Schedule instruments
   instruments.downlifter.start(0);
 
@@ -384,8 +378,26 @@ function song(time) {
   console.log("Playing note at time:", time);
 }
 
-document.getElementById("start-button").addEventListener("click", startMusic);
+document.body.addEventListener("click", () => {
+  Tone.start()
+    .then(() => {
+      console.log("Audio context started!");
+      setup(); // Chiamata a setup dopo l'inizializzazione dell'audio
+    })
+    .catch((e) => {
+      console.error("Failed to start audio context:", e);
+    });
+});
 
+// Aggiungi i listener per i controlli
+document.getElementById("start-button").addEventListener("click", startMusic);
+document.getElementById("stop-button").addEventListener("click", stopMusic);
+document.getElementById("volume-fader").addEventListener("input", adjustVolume);
+document.getElementById("drums-fader").addEventListener("input", adjustDrums);
+document.getElementById("bass-fader").addEventListener("input", adjustBass);
+document.getElementById("melodies-fader").addEventListener("input", adjustMelodies);
+
+// Wait for user interaction to start the audio context
 document.body.addEventListener("click", () => {
   Tone.start().then(() => {
     console.log("Audio context started!");
@@ -400,4 +412,39 @@ document.body.addEventListener("click", () => {
 function startMusic() {
   Tone.Transport.start(); // Avvia la trasport
   console.log("Music started");
+}
+
+// Funzione per fermare la musica
+function stopMusic() {
+  Tone.Transport.stop(); // Ferma la trasport
+  console.log("Music stopped");
+}
+
+// Funzione per regolare il volume globale
+function adjustVolume(event) {
+  volumeControl = event.target.value / 100; // Normalizza il valore da 0 a 1
+  Tone.getDestination().volume.value = Tone.dbToGain(volumeControl * 100); // Imposta il volume globale
+  console.log("Volume adjusted to", volumeControl);
+}
+
+// Funzioni per regolare volume singoli gruppi di suoni
+function adjustDrums(event) {
+  drumsControl = event.target.value / 100;
+  instruments.kick.volume.value = Tone.dbToGain(drumsControl * 100); // Regola il volume del kick
+  instruments.clap.volume.value = Tone.dbToGain(drumsControl * 100); // Regola il volume del clap
+  instruments.snare.volume.value = Tone.dbToGain(drumsControl * 100); // Regola il volume dello snare
+  console.log("Drums volume adjusted to", drumsControl);
+}
+
+function adjustBass(event) {
+  bassControl = event.target.value / 100;
+  bassPart.volume.value = Tone.dbToGain(bassControl * 100); // Regola il volume del bassPart
+  console.log("Bass volume adjusted to", bassControl);
+}
+
+function adjustMelodies(event) {
+  melodiesControl = event.target.value / 100;
+  instruments.synth.volume.value = Tone.dbToGain(melodiesControl * 100); // Regola il volume del synth
+  instruments.piano.volume.value = Tone.dbToGain(melodiesControl * 100); // Regola il volume del piano
+  console.log("Melodies volume adjusted to", melodiesControl);
 }
