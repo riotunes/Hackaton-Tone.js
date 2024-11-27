@@ -1,4 +1,4 @@
-/ Variabili per il controllo delle fader
+// Variabili per il controllo delle fader
 let volumeControl = 0.5;
 let drumsControl = 1;
 let bassControl = 1;
