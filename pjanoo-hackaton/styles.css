@@ -1,4 +1,9 @@
 /* General Styles */
+html, body {
+  height: 100%; /* Imposta l'altezza della pagina al 100% */
+  margin: 0; /* Rimuovi il margine predefinito */
+}
+
 body {
   font-family: 'Arial', sans-serif;
   text-align: center;
