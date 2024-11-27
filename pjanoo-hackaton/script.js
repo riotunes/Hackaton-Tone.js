@@ -383,3 +383,21 @@ function setupEffects() {}
 function song(time) {
   console.log("Playing note at time:", time);
 }
+
+document.getElementById("start-button").addEventListener("click", startMusic);
+
+document.body.addEventListener("click", () => {
+  Tone.start().then(() => {
+    console.log("Audio context started!");
+    setup(); // Call setup after the audio context is enabled
+    startMusic(); // Avvia la musica subito dopo aver avviato Tone.js
+  }).catch((e) => {
+    console.error("Failed to start audio context:", e);
+  });
+});
+
+// Funzione per avviare la musica
+function startMusic() {
+  Tone.Transport.start(); // Avvia la trasport
+  console.log("Music started");
+}
