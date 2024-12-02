@@ -1,16 +1,9 @@
-// Variabili per il controllo delle fader
-let volumeControl = 0.5;
-let drumsControl = 1;
-let bassControl = 1;
-let melodiesControl = 1;
-
+// MODEL
 const mainGain = new Tone.Gain(0.5).toDestination();
 const drumsGain = new Tone.Gain(0.5).connect(mainGain);
 const bassGain = new Tone.Gain(0.5).connect(mainGain);
 const melodiesGain = new Tone.Gain(0.5).connect(mainGain);
 
-
-// MODEL
 let instruments = [];
 let patterns = [];
 let effects = [];
