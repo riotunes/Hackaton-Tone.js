@@ -6,7 +6,7 @@ const melodiesGain = new Tone.Gain(0.5).connect(mainGain);
 
 const hpFilter = new Tone.Filter(20, "highpass");
 const lpFilter = new Tone.Filter(12000, "lowpass");
-const reverb = new Tone.Reverb(0.5);
+const reverb = new Tone.Reverb(0.3);
 
 mainGain.chain(hpFilter, lpFilter, reverb, Tone.getDestination());
 
@@ -338,6 +338,7 @@ function setupEffects() {
 // Aggiungi i listener per i controlli
 document.getElementById("start-button").addEventListener("click", startMusic);
 document.getElementById("stop-button").addEventListener("click", stopMusic);
+document.getElementById("play-button").addEventListener("click", playTrack);
 document.getElementById("volume-fader").addEventListener("input", adjustVolume);
 document.getElementById("drums-fader").addEventListener("input", adjustDrums);
 document.getElementById("bass-fader").addEventListener("input", adjustBass);
@@ -390,6 +391,57 @@ function stopMusic() {
     }
     Tone.getTransport().stop()
     console.log("Music stopped");
+}
+
+function playTrack() {
+    if (Tone.context.state != "running") return
+    Tone.Transport.start();
+
+    patterns.kickPattern.start(0);
+    patterns.kickPattern.stop("16m");
+  
+    patterns.clapPattern.start(0);
+    patterns.clapPattern.stop("16m");
+  
+    patterns.clapLowPattern.start("16m");
+    patterns.clapLowPattern.stop("32m");
+
+    patterns.synthPattern.start("16m");
+    patterns.synthPattern.stop("31m");
+    patterns.synthPattern.start("32m");
+    patterns.synthPattern.stop("64m");
+  
+    patterns.kickPattern.start("32m");
+    patterns.kickPattern.stop("64m");
+  
+    patterns.clapPattern.start("32m");
+    patterns.clapPattern.stop("64m");
+  
+    patterns.snarePattern.start("32m");
+    patterns.snarePattern.stop("64m");
+  
+    patterns.closedHatPattern.start("32m");
+    patterns.closedHatPattern.stop("64m");
+  
+    patterns.openHatPattern.start("32m");
+    patterns.openHatPattern.stop("64m");
+
+    patterns.bassPattern.start("32m");
+    patterns.bassPattern.stop("64m");
+  
+    patterns.bassBreakPattern.start("64m");
+    patterns.bassBreakPattern.stop("80m");
+  
+    patterns.arpPattern.start("8m");
+    patterns.arpPattern.stop("31m");
+    patterns.arpPattern.start("72m");
+    patterns.arpPattern.stop("80m");
+
+  
+    // Schedule instruments
+    instruments.downlifter.start(0); // non synca, VANNO PROBABILMENT MESSI IN UN PATTERN SENZA LOOP
+
+    instruments.uplifter.start("6m");
 }
 
 // Funzione per regolare il volume globale

@@ -31,9 +31,6 @@ h2 {
   transition: all 0.3s ease-in-out; /* Aggiunge una transizione per eventuali modifiche */
 }
 
-
-
-
 /* Control Panel Styles */
 .control-panel {
   width: 400px;
@@ -104,7 +101,6 @@ button:hover {
   margin-bottom: 20px;
   text-align: center;
 }
-
 .hp-fader {
   margin-bottom: 10px;
   text-align: center;
@@ -112,6 +108,12 @@ button:hover {
 .lp-fader {
   margin-bottom: 10px;
   text-align: center;
+}
+
+#play-button {
+  margin-top: 20px;
+  text-align: center;
+  background: linear-gradient(45deg,  #2575fc, #b317da); /* Gradiente dinamico sullo sfondo */
 }
 
 label {
