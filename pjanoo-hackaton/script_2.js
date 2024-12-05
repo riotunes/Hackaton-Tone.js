@@ -1,8 +1,14 @@
 // MODEL
-const mainGain = new Tone.Gain(0.5).toDestination();
+const mainGain = new Tone.Gain(0.5);
 const drumsGain = new Tone.Gain(0.5).connect(mainGain);
 const bassGain = new Tone.Gain(0.5).connect(mainGain);
 const melodiesGain = new Tone.Gain(0.5).connect(mainGain);
+
+const hpFilter = new Tone.Filter(20, "highpass");
+const lpFilter = new Tone.Filter(12000, "lowpass");
+const reverb = new Tone.Reverb(0.5);
+
+mainGain.chain(hpFilter, lpFilter, reverb, Tone.getDestination());
 
 let instruments = [];
 let patterns = [];
@@ -16,8 +22,14 @@ function setup() {
     // Set up patterns
     setupPatterns();
 
+    // Set up effects
+    setupEffects();
+
     // Start the Tone.js transport
     Tone.Transport.bpm.value = 126;
+
+    // Set the reverb mix to 0
+    reverb.wet.rampTo(0, 0.01);
 }
 
 // INSTRUMENTS
@@ -319,6 +331,10 @@ function setupPatterns() {
 
 }
 
+function setupEffects() {
+
+}
+
 // Aggiungi i listener per i controlli
 document.getElementById("start-button").addEventListener("click", startMusic);
 document.getElementById("stop-button").addEventListener("click", stopMusic);
@@ -326,6 +342,11 @@ document.getElementById("volume-fader").addEventListener("input", adjustVolume);
 document.getElementById("drums-fader").addEventListener("input", adjustDrums);
 document.getElementById("bass-fader").addEventListener("input", adjustBass);
 document.getElementById("melodies-fader").addEventListener("input", adjustMelodies);
+document.getElementById("hp-fader").addEventListener("input", adjustHP);
+document.getElementById("lp-fader").addEventListener("input", adjustLP);
+document.getElementById("reverb-fader").addEventListener("input", adjustReverb);
+
+
 
 // Wait for user interaction to start the audio context
 window.addEventListener("load", () => {
@@ -361,9 +382,6 @@ function startMusic() {
     console.log("Music started");
 }
 
-// Funzione per fermare la musica
-document.getElementById("stop-button").addEventListener("click", stopMusic);
-
 function stopMusic() {
     if (Tone.context.state != "running") return
     console.log("Stopping all sound...")
@@ -398,4 +416,22 @@ function adjustMelodies(event) {
     value = event.target.value;
     melodiesGain.gain.rampTo(value, 0.01);
     console.log("Melodies volume adjusted to", value);
+}
+
+function adjustHP(event) {
+    value = event.target.value;
+    hpFilter.frequency.rampTo(value, 0.01);
+    console.log("HP frequency adjusted to", value);
+}
+
+function adjustLP(event) {
+    value = event.target.value;
+    lpFilter.frequency.rampTo(12040 - value, 0.01);
+    console.log("LP frequency adjusted to", 12040 - value);
+}
+
+function adjustReverb(event) {
+    value = event.target.value;
+    reverb.wet.rampTo(value, 0.01);
+    console.log("Reverb mix adjusted to", value);
 }

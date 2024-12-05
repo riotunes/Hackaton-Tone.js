@@ -101,6 +101,16 @@ button:hover {
 /* Volume Fader Styles */
 .volume-fader {
   margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.hp-fader {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.lp-fader {
+  margin-bottom: 10px;
   text-align: center;
 }
 
